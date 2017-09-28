@@ -1,11 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h3>I'm in the app component</h3>
-      <!--<div app-servers></div>-->
-      <!--<div class="app-servers"></div>-->
-      <app-servers></app-servers>
-    </div>
-  </div>
+  <ol>
+    <li>Add a Input field which updates a property ('username') via Two-Way-Binding</li>
+    <li>Output the username property via String Interpolation (in a paragraph below the input)</li>
+    <li>Add a button which may only be clicked if the username is NOT an empty string</li>
+    <li>Upon clicking the button, the username should be reset to an empty string</li>
+  </ol>
+
+  <form name="credentials">
+    <label>
+      Enter some text:
+      <input class="form-control" [(ngModel)]="username" name="username">
+    </label>
+    <button [disabled]="!username" (click)="username=''">Reset</button>
+  </form>
+  <p>{{username}}</p>
 </div>
