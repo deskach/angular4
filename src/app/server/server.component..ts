@@ -5,5 +5,10 @@ import {Component} from "@angular/core";
   templateUrl: './server.component.html',
 })
 export class ServerComponent {
+  serverId = Math.ceil(Math.random() * 100);
+  serverStatus = Math.random() > 0.5 ? 'offline' : 'online';
 
+  getServerStatus() {
+    return this.serverStatus;
+  }
 }
