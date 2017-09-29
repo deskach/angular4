@@ -4,7 +4,13 @@ import {Component} from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  // styles: ['h3 {color: green;}']
 })
 export class AppComponent {
+  hidden = false;
+  clickItems = [];
+
+  addClickedItem() {
+    this.clickItems.push(Date.now());
+    this.hidden = !this.hidden;
+  }
 }
