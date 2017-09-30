@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SECModel} from '../shared/models';
+import {SECModel} from '../shared/server-element.model';
 
 @Component({
   selector: 'app-server-element',
