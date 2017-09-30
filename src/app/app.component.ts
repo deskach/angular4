@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {SECModel, SECModelType} from "./shared/server-element.model";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +6,15 @@ import {SECModel, SECModelType} from "./shared/server-element.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  serverElements: SECModel[] = [
-    new SECModel(SECModelType.SERVER, 'testServer', 'test'),
-  ];
+  evens: number[] = [];
+  odds: number[] = [];
 
-  onServerInstanceAdded(serverData: SECModel) {
-    this.serverElements.push(serverData);
+  onAdd(cntr) {
+    (cntr % 2 === 0) ? this.evens.push(cntr) : this.odds.push(cntr);
   }
 
-  onBlueprintAdded() {
-    // this.serverElements.push({
-    //   type: 'blueprint',
-    //   name: this.newServerName,
-    //   content: this.newServerContent
-    // });
+  onGameStart() {
+    this.evens = [];
+    this.odds = [];
   }
 }
