@@ -9,19 +9,19 @@ import {SECModel, SECModelType} from "../shared/server-element.model";
 export class CockpitComponent implements OnInit {
   @Output() serverCreated = new EventEmitter<SECModel>();
   @Output() bluePrintCreated = new EventEmitter<SECModel>();
-  newServerName = '';
-  newServerContent = '';
+
+  newServerContent: string;
 
   ngOnInit() {
   }
 
-  onAddServer() {
-    this.serverCreated.emit(new SECModel(SECModelType.SERVER, this.newServerName, this.newServerContent));
+  onAddServer(nameInput: HTMLInputElement) {
+    this.serverCreated.emit(new SECModel(SECModelType.SERVER, nameInput.value, this.newServerContent));
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(nameInput: HTMLInputElement) {
     this.bluePrintCreated.emit(
-      new SECModel(SECModelType.BLUE_PRINT, this.newServerName, this.newServerContent)
+      new SECModel(SECModelType.BLUE_PRINT, nameInput.value, this.newServerContent)
     );
   }
 }
