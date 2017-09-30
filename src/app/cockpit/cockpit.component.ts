@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {SECModel, SECModelType} from "../shared/server-element.model";
 
 @Component({
@@ -10,18 +10,18 @@ export class CockpitComponent implements OnInit {
   @Output() serverCreated = new EventEmitter<SECModel>();
   @Output() bluePrintCreated = new EventEmitter<SECModel>();
 
-  newServerContent: string;
+  @ViewChild('serverContentInput') serverContentInput: ElementRef; // references #serverContentInput from the view
 
   ngOnInit() {
   }
 
   onAddServer(nameInput: HTMLInputElement) {
-    this.serverCreated.emit(new SECModel(SECModelType.SERVER, nameInput.value, this.newServerContent));
+    this.serverCreated.emit(new SECModel(SECModelType.SERVER, nameInput.value, this.serverContentInput.nativeElement.value));
   }
 
   onAddBlueprint(nameInput: HTMLInputElement) {
     this.bluePrintCreated.emit(
-      new SECModel(SECModelType.BLUE_PRINT, nameInput.value, this.newServerContent)
+      new SECModel(SECModelType.BLUE_PRINT, nameInput.value, this.serverContentInput.nativeElement.value)
     );
   }
 }
