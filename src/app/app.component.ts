@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AccountsService} from "./services/accounts.service";
 
 @Component({
   selector: 'app-root',
@@ -7,11 +6,16 @@ import {AccountsService} from "./services/accounts.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _accoutsService: AccountsService) {
+  activeUsers = ['Max', 'Anna'];
+  inactiveUsers = ['Chris', 'Manu'];
 
+  onSetToInactive(id: number) {
+    this.inactiveUsers.push(this.activeUsers[id]);
+    this.activeUsers.splice(id, 1);
   }
 
-  get accounts() {
-    return this._accoutsService.accounts;
+  onSetToActive(id: number) {
+    this.activeUsers.push(this.inactiveUsers[id]);
+    this.inactiveUsers.splice(id, 1);
   }
 }
