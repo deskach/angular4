@@ -1,6 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Ingredient} from "../../shared/ingredient.model";
 import _ from 'lodash';
+import {ShoppingListService} from "../shopping-list.service";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -11,13 +12,9 @@ export class ShoppingEditComponent implements OnInit {
   @ViewChild('nameInput') nameInput: ElementRef;
   @ViewChild('amountInput') amountInput: ElementRef;
 
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
-  @Output() ingredientDeleted = new EventEmitter<number>();
-  @Output() ingredientsCleared = new EventEmitter<void>();
-
   @Input() ingredient: Ingredient;
 
-  constructor() {
+  constructor(private _slService: ShoppingListService) {
   }
 
   ngOnInit() {
@@ -28,20 +25,20 @@ export class ShoppingEditComponent implements OnInit {
     const amount = parseInt(this.amountInput.nativeElement.value);
 
     this.ingredient = new Ingredient(name, amount);
-    this.ingredientAdded.emit(this.ingredient);
+    this._slService.addIngredient(this.ingredient);
   }
 
   deleteIngredient() {
     const id = _.get(this.ingredient, 'id', null);
 
     if (id) {
-      this.ingredientDeleted.emit(id);
+      this._slService.deleteIngredient(id);
     }
 
     this.ingredient = null;
   }
 
   clearIngredients() {
-    this.ingredientsCleared.emit();
+    this._slService.clearIngredients();
   }
 }

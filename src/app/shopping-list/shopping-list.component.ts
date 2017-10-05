@@ -1,36 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {Ingredient} from "../shared/ingredient.model";
-import _ from 'lodash';
+import {ShoppingListService} from "./shopping-list.service";
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
+  providers: [],
 })
 export class ShoppingListComponent implements OnInit {
   selectedIngredient: Ingredient;
 
-  private _ingredients: { [id: string]: Ingredient } = {};
-
-  get ingredients() {
-    return _.values(this._ingredients);
+  constructor(private _shoppingListService: ShoppingListService) {
   }
 
-  constructor() {
+  get ingredients() {
+    return this._shoppingListService.ingredients;
   }
 
   ngOnInit() {
   }
 
-  addIngredient(ingredient: Ingredient) {
-    this._ingredients[ingredient.id] = ingredient;
-  }
-
-  deleteIngredient(id: number) {
-    delete this._ingredients[id];
-  }
-
-  clearIngredients() {
-    this._ingredients = {};
-  }
 }
