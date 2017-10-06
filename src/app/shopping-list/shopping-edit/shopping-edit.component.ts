@@ -24,7 +24,7 @@ export class ShoppingEditComponent implements OnInit {
     const name = this.nameInput.nativeElement.value;
     const amount = parseInt(this.amountInput.nativeElement.value);
 
-    this.ingredient = new Ingredient(name, amount);
+    this.ingredient = Ingredient.createInstance(name, amount);
     this._slService.addIngredient(this.ingredient);
   }
 
