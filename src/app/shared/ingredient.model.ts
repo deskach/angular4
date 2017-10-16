@@ -1,4 +1,4 @@
-import { Model } from "./model";
+import { Model } from './model';
 
 export class Ingredient extends Model {
   constructor(public id: number = Model.newId(),

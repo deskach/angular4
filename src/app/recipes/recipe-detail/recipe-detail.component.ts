@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from "../../shared/recipe.model";
-import { RecipeService } from "../recipe.service";
-import { ActivatedRoute, Params, Router } from "@angular/router";
+import { Recipe } from '../../shared/recipe.model';
+import { RecipeService } from '../recipe.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
