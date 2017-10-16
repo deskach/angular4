@@ -1,10 +1,9 @@
-import {uniqueId} from 'lodash';
+import { Model } from "./model";
 
-export class Ingredient {
-  constructor(public name: string, public amount: number, public id: number) {
-  }
-
-  static createInstance(name: string, amount: number) {
-    return new Ingredient(name, amount, uniqueId());
+export class Ingredient extends Model {
+  constructor(public id: number = Model.newId(),
+              public name?: string,
+              public amount?: number,) {
+    super(id);
   }
 }

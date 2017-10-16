@@ -1,6 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Ingredient} from "../shared/ingredient.model";
-import _ from 'lodash';
+import { Injectable } from '@angular/core';
+import { Ingredient } from "../shared/ingredient.model";
 
 @Injectable()
 export class ShoppingListService {
@@ -11,7 +10,7 @@ export class ShoppingListService {
   private _ingredients: { [id: string]: Ingredient } = {};
 
   get ingredients() {
-    return _.values(this._ingredients);
+    return Object.keys(this._ingredients).map(k => this._ingredients[k]);
   }
 
   addIngredient(ingredient: Ingredient) {

@@ -1,7 +1,6 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Ingredient} from "../../shared/ingredient.model";
-import _ from 'lodash';
-import {ShoppingListService} from "../shopping-list.service";
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Ingredient } from "../../shared/ingredient.model";
+import { ShoppingListService } from "../shopping-list.service";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -24,14 +23,14 @@ export class ShoppingEditComponent implements OnInit {
     const name = this.nameInput.nativeElement.value;
     const amount = parseInt(this.amountInput.nativeElement.value);
 
-    this.ingredient = Ingredient.createInstance(name, amount);
+    this.ingredient.assign({ name, amount });
     this._slService.addIngredient(this.ingredient);
   }
 
   deleteIngredient() {
-    const id = _.get(this.ingredient, 'id', null);
+    const id = this.ingredient && this.ingredient['id'] || null;
 
-    if (id) {
+    if (id !== null) {
       this._slService.deleteIngredient(id);
     }
 

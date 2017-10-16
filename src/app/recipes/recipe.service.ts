@@ -1,37 +1,44 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Recipe} from "./tecipe.model";
-import {Ingredient} from "../shared/ingredient.model";
-import {ShoppingListService} from "../shopping-list/shopping-list.service";
+import { EventEmitter, Injectable } from '@angular/core';
+import { Recipe } from "../shared/recipe.model";
+import { Ingredient } from "../shared/ingredient.model";
+import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
 @Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
-  private _recipes: Recipe[] = [
-    new Recipe('Schnitzel',
+  private _recipes: { [key: number]: Recipe } = {
+    0: new Recipe(0,
+      'Schnitzel',
       '1st recipe',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
       [
-        Ingredient.createInstance('Meat', 1),
-        Ingredient.createInstance('French Fries', 20),
+        new Ingredient().assign({ name: 'Meat', amount: 1 }),
+        new Ingredient().assign({ name: 'French Fries', amount: 20 }),
       ]
     ),
-    new Recipe('Burger',
+    1: new Recipe(1,
+      'Burger',
       '2nd recipe',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
       [
-        Ingredient.createInstance('Bread', 2),
-        Ingredient.createInstance('Meat', 1),
+        new Ingredient().assign({ name: 'Bread', amount: 2 }),
+        new Ingredient().assign({ name: 'Meat', amount: 1 }),
       ]
+      ,
     ),
-  ];
+  };
 
   constructor(private _slService: ShoppingListService) {
 
   }
 
   get recipes() {
-    return this._recipes.slice(); // slice creates a copy of the array
+    return Object.keys(this._recipes).map(k => this._recipes[k]);
+  }
+
+  getRecipe(id: number) {
+    return this._recipes[id];
   }
 
   addIngredients2ShoppingList(ingredients: Ingredient[]) {
