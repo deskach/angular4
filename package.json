@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot --base-href /angular4",
+    "build": "ng build --prod --aot --base-href /angular4 --deploy-url https://deskach.github.io/angular4/",
     "deploy": "git-directory-deploy --directory dist/ --branch gh-pages",
     "test": "ng test",
     "lint": "ng lint",
