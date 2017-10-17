@@ -6,7 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --aot --base-href /angular4 --deploy-url https://deskach.github.io/angular4/",
-    "deploy": "git-directory-deploy --directory dist/ --branch gh-pages",
+    "git-directory-deploy": "git-directory-deploy --directory dist/ --branch gh-pages",
+    "deploy": "npm run build && npm run git-directory-deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

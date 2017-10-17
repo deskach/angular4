@@ -14,7 +14,7 @@ const appRoutes: Routes = [
     component: RecipesComponent,
     children: [
       { path: '', component: RecipeStartComponent },
-      { path: 'new', component: RecipeEditComponent }, //static route should precede dynamic
+      { path: 'new', component: RecipeEditComponent }, // static route should precede dynamic
       { path: ':id', component: RecipeDetailComponent },
       { path: ':id/edit', component: RecipeEditComponent },
     ]
