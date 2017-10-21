@@ -27,5 +27,6 @@ export class AppComponent {
   onSubmit() {
     console.log(this._form);
     console.log(this._form.value);
+    // this._form.reset(); // supports same format as form.patchValue
   }
 }
