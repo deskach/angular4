@@ -11,13 +11,22 @@ export class AppComponent implements OnInit {
   signupForm: FormGroup;
 
   get hobbies(): FormArray {
-    return (<FormArray>this.signupForm.get('hobbies'));
+    return <FormArray>this.signupForm.get('hobbies');
+  }
+
+  get userData(): { [key: string]: FormControl } {
+    return {
+      'username': <FormControl>this.signupForm.get('userData.username'),
+      'email': <FormControl>this.signupForm.get('userData.username'),
+    };
   }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
-        'username': new FormControl(null, Validators.required),
+        'username': new FormControl(null, [
+          Validators.required, this.forbiddenNames.bind(this)
+        ]),
         'email': new FormControl(null, [Validators.required, Validators.email]),
       }),
       'gender': new FormControl('male'),
@@ -30,6 +39,16 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm.value);
+    console.log(this.signupForm);
+  }
+
+  forbiddenNames(control: FormControl): { [key: string]: boolean } {
+    const forbiddenUserNames = ['Chris', 'Anna'];
+
+    if (forbiddenUserNames.indexOf(control.value) > -1) {
+      return { 'nameIsForbidden': true };
+    }
+
+    return null; // if valid return null!!!
   }
 }
