@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +28,34 @@ export class AppComponent implements OnInit {
         'username': new FormControl(null, [
           Validators.required, this.forbiddenNames.bind(this)
         ]),
-        'email': new FormControl(null, [Validators.required, Validators.email]),
+        'email': new FormControl(null,
+          [
+            Validators.required, Validators.email
+          ],
+          [
+            this.forbiddenEmails.bind(this)
+          ]
+        ),
       }),
       'gender': new FormControl('male'),
       'hobbies': new FormArray([]),
     });
+
+    // this.signupForm.valueChanges.subscribe(value => console.log(value));
+    // this.signupForm.statusChanges.subscribe(value => console.log(value));
+    this.signupForm.setValue({
+      'userData': {
+        'username': 'Test',
+        'email': 'test@google.com',
+      },
+      'gender': 'male',
+      'hobbies': [],
+    });
+    // this.signupForm.patchValue({
+    //   'userData': {
+    //     'username': 'Test1',
+    //   },
+    // });
   }
 
   handleAddHobby() {
@@ -50,5 +74,19 @@ export class AppComponent implements OnInit {
     }
 
     return null; // if valid return null!!!
+  }
+
+  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.com') {
+          resolve({ 'emailIsForbidden': true });
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+
+    return promise;
   }
 }
