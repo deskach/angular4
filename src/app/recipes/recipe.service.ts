@@ -1,45 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '../shared/recipe.model';
+
+import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  private _recipes: { [key: number]: Recipe } = {
-    0: new Recipe(0,
-      'Schnitzel',
-      '1st recipe',
+
+  private recipes: Recipe[] = [
+    new Recipe(
+      'Tasty Schnitzel',
+      'A super-tasty Schnitzel - just awesome!',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
       [
-        new Ingredient().assign({ name: 'Meat', amount: 1 }),
-        new Ingredient().assign({ name: 'French Fries', amount: 20 }),
-      ]
-    ),
-    1: new Recipe(1,
-      'Burger',
-      '2nd recipe',
+        new Ingredient('Meat', 1),
+        new Ingredient('French Fries', 20)
+      ]),
+    new Recipe('Big Fat Burger',
+      'What else you need to say?',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
       [
-        new Ingredient().assign({ name: 'Bread', amount: 2 }),
-        new Ingredient().assign({ name: 'Meat', amount: 1 }),
-      ]
-      ,
-    ),
-  };
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1)
+      ])
+  ];
 
-  constructor(private _slService: ShoppingListService) {
-
+  constructor(private slService: ShoppingListService) {
   }
 
-  get recipes() {
-    return Object.keys(this._recipes).map(k => this._recipes[k]);
+  getRecipes() {
+    return this.recipes.slice();
   }
 
-  getRecipe(id: number) {
-    return this._recipes[id];
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 
-  addIngredients2ShoppingList(ingredients: Ingredient[]) {
-    this._slService.addIngredients(ingredients);
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 }
