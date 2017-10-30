@@ -9,8 +9,8 @@
             id="name"
             class="form-control"
             name="name"
-            required
             ngModel
+            required
           >
         </div>
         <div class="col-sm-2 form-group">
@@ -20,25 +20,26 @@
             id="amount"
             class="form-control"
             name="amount"
-            required
-            pattern="^[1-9][0-9]*$"
             ngModel
+            required
+            pattern="^[1-9]+[0-9]*$"
           >
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
-            {{editedItemIndex === null ? 'Add' : 'Update'}}
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}
           </button>
-          <button class="btn btn-danger" type="button"
-                  [disabled]="editedItemIndex === null"
-                  (click)="onDelete()">
-            Delete
+          <button
+            class="btn btn-danger"
+            type="button"
+            (click)="onDelete()"
+            *ngIf="editMode">Delete
           </button>
-          <button class="btn btn-primary" type="button" (click)="onClear()">
-            Clear
-          </button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
         </div>
       </div>
     </form>
