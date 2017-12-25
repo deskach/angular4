@@ -1,4 +1,4 @@
-import {Ng4CompleteGuidePage} from './app.po';
+import { Ng4CompleteGuidePage } from './app.po';
 
 describe('ng4-complete-guide App', function () {
   let page: Ng4CompleteGuidePage;
