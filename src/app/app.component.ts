@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +32,7 @@ export class AppComponent {
       started: new Date(15, 1, 2017)
     }
   ];
+  public filteredStatus = '';
 
   getStatusClasses(server: { instanceType: string, name: string, status: string, started: Date }) {
     return {
